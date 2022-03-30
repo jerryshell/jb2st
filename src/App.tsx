@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import JavaField from './interfaces/JavaField'
 import SqlField from './interfaces/SqlField'
+import ProjectInfo from './components/ProjectInfo'
 
 const initJavaBeanCode = `public class JavaBean {
     private Boolean deleteFlag;
@@ -46,12 +47,10 @@ const javaType2SqlType = (javaType: string) => {
 
 function App() {
     const [javaBeanStr, setJavaBeanStr] = useState(initJavaBeanCode)
-    const [sqlTableStr, setSqlTableStr] = useState('')
-    const [javaClassName, setJavaClassName] = useState('')
-    const [javaFieldList, setJavaFieldList] = useState<JavaField[]>([])
-    const [sqlTableName, setSqlTableName] = useState('')
-    const [sqlFieldList, setSqlFieldList] = useState<SqlField[]>([])
 
+    const [javaClassName, setJavaClassName] = useState('')
+    const [sqlTableName, setSqlTableName] = useState('')
+    const [javaFieldList, setJavaFieldList] = useState<JavaField[]>([])
     useEffect(() => {
         const javaClassNameMatchResult = javaBeanStr.match(/public class (\w+)/)
         console.log('javaClassNameMatchResult', javaClassNameMatchResult)
@@ -85,6 +84,7 @@ function App() {
 
     }, [javaBeanStr])
 
+    const [sqlFieldList, setSqlFieldList] = useState<SqlField[]>([])
     useEffect(() => {
         const sqlFieldList = javaFieldList.map((javaField) => {
             return {
@@ -96,6 +96,7 @@ function App() {
         setSqlFieldList(sqlFieldList)
     }, [javaFieldList])
 
+    const [sqlTableStr, setSqlTableStr] = useState('')
     useEffect(() => {
         let sqlTableStr = `CREATE TABLE ${sqlTableName} (\n`
         sqlFieldList.forEach((sqlField, index) => {
@@ -121,44 +122,7 @@ function App() {
         <div className="App">
             <h1>Java Bean 2 SQL Table</h1>
 
-            <fieldset>
-                <legend>Project Info</legend>
-                <table>
-                    <tr>
-                        <td>Author</td>
-                        <td>
-                            <a
-                                href="https://github.com/jerryshell"
-                                target="_blank"
-                            >
-                                github.com/jerryshell
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GitHub</td>
-                        <td>
-                            <a
-                                href="https://github.com/jerryshell/jb2st"
-                                target="_blank"
-                            >
-                                github.com/jerryshell/jb2st
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>License</td>
-                        <td>
-                            <a
-                                href="https://choosealicense.com/licenses/agpl-3.0"
-                                target="_blank"
-                            >
-                                GNU Affero General Public License v3.0
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+            <ProjectInfo/>
 
             <fieldset>
                 <legend>Java Bean Code</legend>
