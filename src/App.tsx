@@ -70,9 +70,12 @@ function App() {
                 .map((javaFieldLine) => {
                     const javaFieldMatchResult = javaFieldLine.match(/private (\w+) (\w+);/)
                     if (javaFieldMatchResult) {
+                        const javaFieldType = javaFieldMatchResult[1]
+                        const javaFieldName = javaFieldMatchResult[2]
                         return {
-                            type: javaFieldMatchResult[1],
-                            name: javaFieldMatchResult[2],
+                            type: javaFieldType,
+                            name: javaFieldName,
+                            primaryKeyFlag: javaFieldName === 'id',
                         } as JavaField
                     }
                     return null
@@ -90,7 +93,7 @@ function App() {
             return {
                 type: javaType2SqlType(javaField.type),
                 name: camelCase2SnakeCase(javaField.name),
-                primaryKeyFlag: javaField.name === 'id',
+                primaryKeyFlag: javaField.primaryKeyFlag,
             } as SqlField
         })
         setSqlFieldList(sqlFieldList)
@@ -111,6 +114,19 @@ function App() {
         sqlTableStr += '\n);'
         setSqlTableStr(sqlTableStr)
     }, [sqlFieldList])
+
+    const updateJavaFieldPrimaryKeyFlag = (javaFieldName: string, primaryKeyFlag: boolean) => {
+        const newJavaFieldList = javaFieldList.map((javaField) => {
+            if (javaField.name === javaFieldName) {
+                return {
+                    ...javaField,
+                    primaryKeyFlag: primaryKeyFlag,
+                }
+            }
+            return javaField
+        })
+        setJavaFieldList(newJavaFieldList)
+    }
 
     const copySqlTableStr2Clipboard = () => {
         window.navigator.clipboard.writeText(sqlTableStr).then(r => {
@@ -140,13 +156,38 @@ function App() {
 
             <fieldset>
                 <legend>Java Field List</legend>
-                {javaFieldList.map((javaField) => {
-                    return (
-                        <div key={javaField.name}>
-                            <code>{javaField.type} {javaField.name}</code>
-                        </div>
-                    )
-                })}
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Primary Key</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {javaFieldList.map((javaField) => {
+                        return (
+                            <tr key={javaField.name}>
+                                <td>
+                                    <code>{javaField.type}</code>
+                                </td>
+                                <td>
+                                    <code>{javaField.name}</code>
+                                </td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={javaField.primaryKeyFlag}
+                                        onChange={e => {
+                                            updateJavaFieldPrimaryKeyFlag(javaField.name, e.target.checked)
+                                        }}
+                                    />
+                                </td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
             </fieldset>
 
             <fieldset>
