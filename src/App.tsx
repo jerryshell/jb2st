@@ -46,6 +46,8 @@ const javaType2SqlType = (javaType: string) => {
             return 'DATETIME'
         case 'Instant':
             return 'TIMESTAMP'
+        case 'LocalDate':
+            return 'DATE'
         case 'BigDecimal':
             return 'DECIMAL(19,3)'
         default:
