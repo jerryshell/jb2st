@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
+import JavaField from './interfaces/JavaField'
+import SqlField from './interfaces/SqlField'
 
 const initJavaBeanCode = `public class JavaBean {
     private Boolean deleteFlag;
@@ -12,24 +14,11 @@ const initJavaBeanCode = `public class JavaBean {
 }`
 
 const camelCase2SnakeCase = (camelCaseStr: string) => {
-    let snakeCaseStr = camelCaseStr.replace(/[A-Z]/g, (match) => {
-        return '_' + match.toLowerCase()
-    })
+    let snakeCaseStr = camelCaseStr.replace(/[A-Z]/g, (match) => '_' + match.toLowerCase())
     if (snakeCaseStr.slice(0, 1) === '_') {
         snakeCaseStr = snakeCaseStr.slice(1)
     }
     return snakeCaseStr
-}
-
-interface JavaField {
-    type: string
-    name: string
-}
-
-interface SqlField {
-    type: string
-    name: string
-    primaryKeyFlag: boolean
 }
 
 const javaType2SqlType = (javaType: string) => {
