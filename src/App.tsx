@@ -13,7 +13,7 @@ const initJavaBeanCode = `public class JavaBean {
 
 const camelCase2SnakeCase = (camelCaseStr: string) => {
     let snakeCaseStr = camelCaseStr.replace(/[A-Z]/g, (match) => {
-        return "_" + match.toLowerCase()
+        return '_' + match.toLowerCase()
     })
     if (snakeCaseStr.slice(0, 1) === '_') {
         snakeCaseStr = snakeCaseStr.slice(1)
