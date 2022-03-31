@@ -9,27 +9,40 @@ const SqlTableCode = () => {
     const [sqlTableCode, setSqlTableStr] = useRecoilState(atoms.sqlTableCode)
 
     useEffect(() => {
-        let sqlTableCode = `CREATE TABLE ${sqlTableName} (\n`
-        let hasPrimaryKey = false
+        const hasPrimaryKey = sqlFieldList.some(sqlField => sqlField.primaryKeyFlag)
+        console.log('hasPrimaryKey', hasPrimaryKey)
+
+        // sql header
+        const sqlTableHeaderStatement = `CREATE TABLE ${sqlTableName} (\n`
+        console.log('sqlTableHeaderStatement', sqlTableHeaderStatement)
+
+        // sql field
+        let sqlTableFieldStatement = ''
         sqlFieldList.forEach((sqlField, index) => {
-            sqlTableCode += `\t${sqlField.name} ${sqlField.type}`
-            if (!hasPrimaryKey && sqlField.primaryKeyFlag) {
-                hasPrimaryKey = true
-            }
-            if (index < sqlFieldList.length - 1) {
-                sqlTableCode += ',\n'
-            }
-            if (index === sqlFieldList.length - 1 && hasPrimaryKey) {
-                sqlTableCode += ',\n'
+            sqlTableFieldStatement += `\t${sqlField.name} ${sqlField.type}`
+            if (hasPrimaryKey || index < sqlFieldList.length - 1) {
+                sqlTableFieldStatement += ',\n'
             }
         })
+        console.log('sqlTableFieldStatement', sqlTableFieldStatement)
+
+        // sql primary key
+        let sqlTablePrimaryKeyStatement = ''
         if (hasPrimaryKey) {
             const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
             const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(', ')
-            sqlTableCode += `\tPRIMARY KEY (${primaryKeyFieldListStr})`
+            sqlTablePrimaryKeyStatement = `\tPRIMARY KEY (${primaryKeyFieldListStr})`
         }
-        sqlTableCode += '\n);'
+        console.log('sqlTablePrimaryKeyStatement', sqlTablePrimaryKeyStatement)
+
+        // sql footer
+        const sqlTableFooterStatement = '\n);'
+        console.log('sqlTableFooterStatement', sqlTableFooterStatement)
+
+        // combination
+        const sqlTableCode = `${sqlTableHeaderStatement}${sqlTableFieldStatement}${sqlTablePrimaryKeyStatement}${sqlTableFooterStatement}`
         console.log('sqlTableCode', sqlTableCode)
+
         setSqlTableStr(sqlTableCode)
     }, [sqlFieldList])
 
