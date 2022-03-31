@@ -17,8 +17,8 @@ const App = () => {
             <JavaClassName/>
             <JavaFieldList/>
             <SqlTableName/>
-            <SqlPrimaryKey/>
             <SqlFieldList/>
+            <SqlPrimaryKey/>
             <SqlTableCode/>
         </>
     )

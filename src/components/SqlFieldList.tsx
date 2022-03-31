@@ -14,23 +14,62 @@ const SqlFieldList = () => {
             return {
                 type: javaType2SqlType(javaField.type),
                 name: camelCase2SnakeCase(javaField.name),
-                primaryKeyFlag: javaField.primaryKeyFlag,
+                primaryKeyFlag: javaField.name === 'id',
             } as SqlField
         })
         console.log('sqlFieldList', sqlFieldList)
         setSqlFieldList(sqlFieldList)
     }, [javaFieldList])
 
+    const updateSqlFieldPrimaryKeyFlag = (sqlFieldName: string, primaryKeyFlag: boolean) => {
+        const newSqlFieldList = sqlFieldList.map((sqlField) => {
+            if (sqlField.name === sqlFieldName) {
+                return {
+                    ...sqlField,
+                    primaryKeyFlag: primaryKeyFlag,
+                }
+            }
+            return sqlField
+        })
+        console.log('newSqlFieldList', newSqlFieldList)
+        setSqlFieldList(newSqlFieldList)
+    }
+
     return (
         <fieldset>
             <legend>SQL Field List</legend>
-            {sqlFieldList.map((sqlField) => {
-                return (
-                    <div key={sqlField.name}>
-                        <code>{sqlField.type} {sqlField.name}</code>
-                    </div>
-                )
-            })}
+            <table>
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Primary Key</th>
+                </tr>
+                </thead>
+                <tbody>
+                {sqlFieldList.map((sqlField) => {
+                    return (
+                        <tr key={sqlField.name}>
+                            <td>
+                                <code>{sqlField.type}</code>
+                            </td>
+                            <td>
+                                <code>{sqlField.name}</code>
+                            </td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    checked={sqlField.primaryKeyFlag}
+                                    onChange={e => {
+                                        updateSqlFieldPrimaryKeyFlag(sqlField.name, e.target.checked)
+                                    }}
+                                />
+                            </td>
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
         </fieldset>
     )
 }

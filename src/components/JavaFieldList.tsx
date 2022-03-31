@@ -21,7 +21,6 @@ const JavaFieldList = () => {
                         return {
                             type: javaFieldType,
                             name: javaFieldName,
-                            primaryKeyFlag: javaFieldName === 'id',
                         } as JavaField
                     }
                     return null
@@ -32,20 +31,6 @@ const JavaFieldList = () => {
         }
     }, [javaBeanCode])
 
-    const updateJavaFieldPrimaryKeyFlag = (javaFieldName: string, primaryKeyFlag: boolean) => {
-        const newJavaFieldList = javaFieldList.map((javaField) => {
-            if (javaField.name === javaFieldName) {
-                return {
-                    ...javaField,
-                    primaryKeyFlag: primaryKeyFlag,
-                }
-            }
-            return javaField
-        })
-        console.log('newJavaFieldList', newJavaFieldList)
-        setJavaFieldList(newJavaFieldList)
-    }
-
     return (
         <fieldset>
             <legend>Java Field List</legend>
@@ -54,7 +39,6 @@ const JavaFieldList = () => {
                 <tr>
                     <th>Type</th>
                     <th>Name</th>
-                    <th>Primary Key</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,15 +50,6 @@ const JavaFieldList = () => {
                             </td>
                             <td>
                                 <code>{javaField.name}</code>
-                            </td>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    checked={javaField.primaryKeyFlag}
-                                    onChange={e => {
-                                        updateJavaFieldPrimaryKeyFlag(javaField.name, e.target.checked)
-                                    }}
-                                />
                             </td>
                         </tr>
                     )

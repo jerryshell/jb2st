@@ -25,7 +25,7 @@ const SqlTableCode = () => {
         })
         if (hasPrimaryKey) {
             const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
-            const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(',')
+            const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(', ')
             sqlTableCode += `\tPRIMARY KEY (${primaryKeyFieldListStr})`
         }
         sqlTableCode += '\n);'
