@@ -1,6 +1,8 @@
 import {useRecoilState, useRecoilValue} from 'recoil'
 import atoms from '../atoms'
 import {useEffect} from 'react'
+import CopyIcon from "../icons/CopyIcon";
+import SqlIcon from "../icons/SqlIcon";
 
 const SqlTableCode = () => {
     const sqlTableName = useRecoilValue(atoms.sqlTableName)
@@ -54,14 +56,16 @@ const SqlTableCode = () => {
 
     return (
         <fieldset>
-            <legend>SQL Table Code</legend>
+            <legend><SqlIcon/> SQL Table Code</legend>
             <textarea
-                style={{height: "220px"}}
+                style={{height: '220px'}}
                 disabled
                 value={sqlTableCode}
                 onChange={e => setSqlTableStr(e.target.value)}
             />
-            <button onClick={copySqlTableStr2Clipboard}>Copy To Clipboard</button>
+            <button onClick={copySqlTableStr2Clipboard}>
+                <CopyIcon/> Copy
+            </button>
         </fieldset>
     )
 }

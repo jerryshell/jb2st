@@ -2,24 +2,27 @@ import {useRecoilState, useRecoilValue} from 'recoil'
 import atoms from '../atoms'
 import {useEffect} from 'react'
 import SqlField from '../interfaces/SqlField'
-import {camelCase2SnakeCase, javaType2SqlType} from '../util'
+import {camelCase2SnakeCase} from '../util'
 
 const SqlFieldList = () => {
     const javaFieldList = useRecoilValue(atoms.javaFieldList)
+    const javaType2SqlTypeMap = useRecoilValue(atoms.javaType2SqlTypeMap)
 
     const [sqlFieldList, setSqlFieldList] = useRecoilState(atoms.sqlFieldList)
 
     useEffect(() => {
         const sqlFieldList = javaFieldList.map((javaField) => {
+            const sqlType = javaType2SqlTypeMap[javaField.type] ?
+                javaType2SqlTypeMap[javaField.type] : 'VARCHAR(255)'
             return {
-                type: javaType2SqlType(javaField.type),
+                type: sqlType,
                 name: camelCase2SnakeCase(javaField.name),
                 primaryKeyFlag: javaField.name === 'id',
             } as SqlField
         })
         console.log('sqlFieldList', sqlFieldList)
         setSqlFieldList(sqlFieldList)
-    }, [javaFieldList])
+    }, [javaFieldList, javaType2SqlTypeMap])
 
     const updateSqlFieldPrimaryKeyFlag = (sqlFieldName: string, primaryKeyFlag: boolean) => {
         const newSqlFieldList = sqlFieldList.map((sqlField) => {

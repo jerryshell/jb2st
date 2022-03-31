@@ -7,6 +7,7 @@ import SqlTableName from './components/SqlTableName'
 import SqlPrimaryKey from './components/SqlPrimaryKey'
 import SqlFieldList from './components/SqlFieldList'
 import SqlTableCode from './components/SqlTableCode'
+import JavaType2SqlTypeMapConfig from './components/JavaType2SqlTypeMapConfig'
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
             <SqlTableName/>
             <SqlFieldList/>
             <SqlPrimaryKey/>
+            <JavaType2SqlTypeMapConfig/>
             <SqlTableCode/>
         </>
     )
