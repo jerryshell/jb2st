@@ -1,8 +1,8 @@
 import {useRecoilState, useRecoilValue} from 'recoil'
 import atoms from '../atoms'
 import {useEffect} from 'react'
-import CopyIcon from "../icons/CopyIcon";
-import SqlIcon from "../icons/SqlIcon";
+import CopyIcon from '../icons/CopyIcon'
+import SqlIcon from '../icons/SqlIcon'
 
 const SqlTableCode = () => {
     const sqlTableName = useRecoilValue(atoms.sqlTableName)
