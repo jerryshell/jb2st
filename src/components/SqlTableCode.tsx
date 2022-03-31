@@ -13,7 +13,7 @@ const SqlTableCode = () => {
         let hasPrimaryKey = false
         sqlFieldList.forEach((sqlField, index) => {
             sqlTableCode += `\t${sqlField.name} ${sqlField.type}`
-            if (sqlField.primaryKeyFlag) {
+            if (!hasPrimaryKey && sqlField.primaryKeyFlag) {
                 hasPrimaryKey = true
             }
             if (index < sqlFieldList.length - 1) {
@@ -23,9 +23,9 @@ const SqlTableCode = () => {
                 sqlTableCode += ',\n'
             }
         })
-        const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
-        const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(',')
         if (hasPrimaryKey) {
+            const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
+            const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(',')
             sqlTableCode += `\tPRIMARY KEY (${primaryKeyFieldListStr})`
         }
         sqlTableCode += '\n);'
