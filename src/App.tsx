@@ -1,18 +1,10 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import './App.css'
 import JavaField from './interfaces/JavaField'
 import SqlField from './interfaces/SqlField'
 import ProjectInfo from './components/ProjectInfo'
-
-const initJavaBeanCode = `public class JavaBean {
-    private Boolean deleteFlag;
-    private Instant createTime;
-    private Instant updateTime;
-    private Long id;
-    private String name;
-    private Integer age;
-    private BigDecimal balance;
-}`
+import {useRecoilState} from "recoil";
+import atoms from "./atoms";
 
 const camelCase2SnakeCase = (camelCaseStr: string) => {
     let snakeCaseStr = camelCaseStr.replace(/[A-Z]/g, (match) => '_' + match.toLowerCase())
@@ -46,24 +38,22 @@ const javaType2SqlType = (javaType: string) => {
 }
 
 function App() {
-    const [javaBeanStr, setJavaBeanStr] = useState(initJavaBeanCode)
+    const [javaBeanCode, setJavaBeanStr] = useRecoilState(atoms.javaBeanCode)
 
-    const [javaClassName, setJavaClassName] = useState('')
-    const [sqlTableName, setSqlTableName] = useState('')
-    const [javaFieldList, setJavaFieldList] = useState<JavaField[]>([])
+    const [javaClassName, setJavaClassName] = useRecoilState(atoms.javaClassName)
     useEffect(() => {
-        const javaClassNameMatchResult = javaBeanStr.match(/public class (\w+)/)
+        const javaClassNameMatchResult = javaBeanCode.match(/public class (\w+)/)
         console.log('javaClassNameMatchResult', javaClassNameMatchResult)
         if (javaClassNameMatchResult) {
             const javaClassName = javaClassNameMatchResult[1]
+            console.log('javaClassName', javaClassName)
             setJavaClassName(javaClassName)
-
-            const sqlTableName = camelCase2SnakeCase(javaClassName)
-            console.log('sqlTableName', sqlTableName)
-            setSqlTableName(sqlTableName)
         }
+    }, [javaBeanCode])
 
-        const javaFieldLineListMatchResult = javaBeanStr.match(/private (.*);/g)
+    const [javaFieldList, setJavaFieldList] = useRecoilState(atoms.javaFieldList)
+    useEffect(() => {
+        const javaFieldLineListMatchResult = javaBeanCode.match(/private (.*);/g)
         console.log('javaFieldLineListMatchResult', javaFieldLineListMatchResult)
         if (javaFieldLineListMatchResult) {
             const newJavaFieldList = javaFieldLineListMatchResult
@@ -84,10 +74,16 @@ function App() {
             console.log('newJavaFieldList', newJavaFieldList)
             setJavaFieldList(newJavaFieldList)
         }
+    }, [javaBeanCode])
 
-    }, [javaBeanStr])
+    const [sqlTableName, setSqlTableName] = useRecoilState(atoms.sqlTableName)
+    useEffect(() => {
+        const sqlTableName = camelCase2SnakeCase(javaClassName)
+        console.log('sqlTableName', sqlTableName)
+        setSqlTableName(sqlTableName)
+    }, [javaClassName])
 
-    const [sqlFieldList, setSqlFieldList] = useState<SqlField[]>([])
+    const [sqlFieldList, setSqlFieldList] = useRecoilState(atoms.sqlFieldList)
     useEffect(() => {
         const sqlFieldList = javaFieldList.map((javaField) => {
             return {
@@ -96,23 +92,34 @@ function App() {
                 primaryKeyFlag: javaField.primaryKeyFlag,
             } as SqlField
         })
+        console.log('sqlFieldList', sqlFieldList)
         setSqlFieldList(sqlFieldList)
     }, [javaFieldList])
 
-    const [sqlTableStr, setSqlTableStr] = useState('')
+    const [sqlTableCode, setSqlTableStr] = useRecoilState(atoms.sqlTableCode)
     useEffect(() => {
-        let sqlTableStr = `CREATE TABLE ${sqlTableName} (\n`
+        let sqlTableCode = `CREATE TABLE ${sqlTableName} (\n`
+        let hasPrimaryKey = false
         sqlFieldList.forEach((sqlField, index) => {
-            sqlTableStr += `\t${sqlField.name} ${sqlField.type}`
+            sqlTableCode += `\t${sqlField.name} ${sqlField.type}`
             if (sqlField.primaryKeyFlag) {
-                sqlTableStr += ' PRIMARY KEY'
+                hasPrimaryKey = true
             }
             if (index < sqlFieldList.length - 1) {
-                sqlTableStr += ',\n'
+                sqlTableCode += ',\n'
+            }
+            if (index === sqlFieldList.length - 1 && hasPrimaryKey) {
+                sqlTableCode += ',\n'
             }
         })
-        sqlTableStr += '\n);'
-        setSqlTableStr(sqlTableStr)
+        const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
+        const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(',')
+        if (hasPrimaryKey) {
+            sqlTableCode += `\tPRIMARY KEY (${primaryKeyFieldListStr})`
+        }
+        sqlTableCode += '\n);'
+        console.log('sqlTableCode', sqlTableCode)
+        setSqlTableStr(sqlTableCode)
     }, [sqlFieldList])
 
     const updateJavaFieldPrimaryKeyFlag = (javaFieldName: string, primaryKeyFlag: boolean) => {
@@ -125,11 +132,12 @@ function App() {
             }
             return javaField
         })
+        console.log('newJavaFieldList', newJavaFieldList)
         setJavaFieldList(newJavaFieldList)
     }
 
     const copySqlTableStr2Clipboard = () => {
-        window.navigator.clipboard.writeText(sqlTableStr).then(r => {
+        window.navigator.clipboard.writeText(sqlTableCode).then(r => {
             console.log('copySqlTableStr2Clipboard', r)
         })
     }
@@ -144,7 +152,7 @@ function App() {
                 <legend>Java Bean Code</legend>
                 <textarea
                     style={{height: "200px"}}
-                    value={javaBeanStr}
+                    value={javaBeanCode}
                     onChange={e => setJavaBeanStr(e.target.value)}
                 />
             </fieldset>
@@ -216,11 +224,11 @@ function App() {
             </fieldset>
 
             <fieldset>
-                <legend>SQL Table</legend>
+                <legend>SQL Table Code</legend>
                 <textarea
                     style={{height: "200px"}}
                     disabled
-                    value={sqlTableStr}
+                    value={sqlTableCode}
                     onChange={e => setSqlTableStr(e.target.value)}
                 />
                 <button onClick={copySqlTableStr2Clipboard}>Copy To Clipboard</button>
