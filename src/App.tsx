@@ -4,10 +4,9 @@ import JavaBeanCode from './components/JavaBeanCode'
 import JavaClassName from './components/JavaClassName'
 import JavaFieldList from './components/JavaFieldList'
 import SqlTableName from './components/SqlTableName'
-import SqlPrimaryKey from './components/SqlPrimaryKey'
 import SqlFieldList from './components/SqlFieldList'
-import SqlTableCode from './components/SqlTableCode'
 import JavaType2SqlTypeMapConfig from './components/JavaType2SqlTypeMapConfig'
+import SqlTableCode from './components/SqlTableCode'
 
 const App = () => {
     return (
@@ -19,7 +18,6 @@ const App = () => {
             <JavaFieldList/>
             <SqlTableName/>
             <SqlFieldList/>
-            <SqlPrimaryKey/>
             <JavaType2SqlTypeMapConfig/>
             <SqlTableCode/>
         </>
