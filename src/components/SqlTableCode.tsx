@@ -59,7 +59,6 @@ const SqlTableCode = () => {
             <legend><SqlIcon/> SQL Table Code</legend>
             <textarea
                 style={{height: '220px'}}
-                disabled
                 value={sqlTableCode}
                 onChange={e => setSqlTableStr(e.target.value)}
             />
