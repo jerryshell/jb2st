@@ -8,7 +8,7 @@ const SqlTableCode = () => {
     const sqlTableName = useRecoilValue(atoms.sqlTableName)
     const sqlFieldList = useRecoilValue(atoms.sqlFieldList)
 
-    const [sqlTableCode, setSqlTableStr] = useRecoilState(atoms.sqlTableCode)
+    const [sqlTableCode, setSqlTableCode] = useRecoilState(atoms.sqlTableCode)
 
     useEffect(() => {
         const hasPrimaryKey = sqlFieldList.some(sqlField => sqlField.primaryKeyFlag)
@@ -45,12 +45,12 @@ const SqlTableCode = () => {
         const sqlTableCode = `${sqlTableHeaderStatement}${sqlTableFieldStatement}${sqlTablePrimaryKeyStatement}${sqlTableFooterStatement}`
         console.log('sqlTableCode', sqlTableCode)
 
-        setSqlTableStr(sqlTableCode)
+        setSqlTableCode(sqlTableCode)
     }, [sqlFieldList])
 
-    const copySqlTableStr2Clipboard = () => {
+    const copySqlTableCode2Clipboard = () => {
         window.navigator.clipboard.writeText(sqlTableCode).then(r => {
-            console.log('copySqlTableStr2Clipboard', r)
+            console.log('copySqlTableCode2Clipboard', r)
         })
     }
 
@@ -60,9 +60,9 @@ const SqlTableCode = () => {
             <textarea
                 style={{height: '220px'}}
                 value={sqlTableCode}
-                onChange={e => setSqlTableStr(e.target.value)}
+                onChange={e => setSqlTableCode(e.target.value)}
             />
-            <button onClick={copySqlTableStr2Clipboard}>
+            <button onClick={copySqlTableCode2Clipboard}>
                 <CopyIcon/> Copy
             </button>
         </fieldset>
