@@ -1,4 +1,4 @@
-import {atom} from 'recoil'
+import { atom } from 'recoil'
 import JavaField from './interfaces/JavaField'
 import SqlField from './interfaces/SqlField'
 

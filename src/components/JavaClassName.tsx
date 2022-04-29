@@ -1,6 +1,6 @@
-import {useRecoilState, useRecoilValue} from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 
 const JavaClassName = () => {
     const javaBeanCode = useRecoilValue(atoms.javaBeanCode)
@@ -20,7 +20,7 @@ const JavaClassName = () => {
     return (
         <fieldset>
             <legend>Java Class Name</legend>
-            <code>{javaClassName}</code>
+            <code>{ javaClassName }</code>
         </fieldset>
     )
 }

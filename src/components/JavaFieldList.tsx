@@ -1,6 +1,6 @@
-import {useRecoilState, useRecoilValue} from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import JavaField from '../interfaces/JavaField'
 
 const JavaFieldList = () => {
@@ -42,18 +42,18 @@ const JavaFieldList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {javaFieldList.map((javaField) => {
+                { javaFieldList.map((javaField) => {
                     return (
-                        <tr key={javaField.name}>
+                        <tr key={ javaField.name }>
                             <td>
-                                <code>{javaField.type}</code>
+                                <code>{ javaField.type }</code>
                             </td>
                             <td>
-                                <code>{javaField.name}</code>
+                                <code>{ javaField.name }</code>
                             </td>
                         </tr>
                     )
-                })}
+                }) }
                 </tbody>
             </table>
         </fieldset>

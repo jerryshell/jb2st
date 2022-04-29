@@ -1,6 +1,6 @@
-import {useRecoilState} from 'recoil'
+import { useRecoilState } from 'recoil'
 import atoms from '../atoms'
-import {useState} from 'react'
+import { useState } from 'react'
 import AddIcon from '../icons/AddIcon'
 import RemoveIcon from '../icons/RemoveIcon'
 
@@ -17,7 +17,7 @@ const JavaType2SqlTypeMapConfig = () => {
     }
 
     const removeJavaType2SqlTypeMap = (javaType: string) => {
-        const newJavaType2SqlTypeMap = {...javaType2SqlTypeMap}
+        const newJavaType2SqlTypeMap = { ...javaType2SqlTypeMap }
         delete newJavaType2SqlTypeMap[javaType]
         setJavaType2SqlTypeMap(newJavaType2SqlTypeMap)
     }
@@ -38,55 +38,55 @@ const JavaType2SqlTypeMapConfig = () => {
                     <td>
                         <input
                             type="text"
-                            value={newJavaType}
+                            value={ newJavaType }
                             placeholder="New Java Type"
-                            onChange={(e) => setNewJavaType(e.target.value)}
+                            onChange={ (e) => setNewJavaType(e.target.value) }
                         />
                     </td>
                     <td>
                         <input
                             type="text"
-                            value={newSqlType}
+                            value={ newSqlType }
                             placeholder="New SQL Type"
-                            onChange={(e) => setNewSqlType(e.target.value)}
+                            onChange={ (e) => setNewSqlType(e.target.value) }
                         />
                     </td>
                     <td>
                         <button
-                            onClick={() => {
+                            onClick={ () => {
                                 updateJavaType2SqlTypeMap(newJavaType, newSqlType)
                                 setNewJavaType('')
                                 setNewSqlType('')
-                            }}
+                            } }
                         >
                             <AddIcon/> Add
                         </button>
                     </td>
                 </tr>
 
-                {Object.keys(javaType2SqlTypeMap).map((javaType) => {
+                { Object.keys(javaType2SqlTypeMap).map((javaType) => {
                     return (
-                        <tr key={javaType}>
+                        <tr key={ javaType }>
                             <td>
-                                <code>{javaType}</code>
+                                <code>{ javaType }</code>
                             </td>
                             <td>
                                 <input
                                     type="text"
-                                    value={javaType2SqlTypeMap[javaType]}
-                                    onChange={(e) => updateJavaType2SqlTypeMap(javaType, e.target.value)}
+                                    value={ javaType2SqlTypeMap[javaType] }
+                                    onChange={ (e) => updateJavaType2SqlTypeMap(javaType, e.target.value) }
                                 />
                             </td>
                             <td>
                                 <button
-                                    onClick={() => removeJavaType2SqlTypeMap(javaType)}
+                                    onClick={ () => removeJavaType2SqlTypeMap(javaType) }
                                 >
                                     <RemoveIcon/> Remove
                                 </button>
                             </td>
                         </tr>
                     )
-                })}
+                }) }
 
             </table>
         </fieldset>

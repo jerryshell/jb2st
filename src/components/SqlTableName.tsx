@@ -1,7 +1,7 @@
-import {useRecoilState, useRecoilValue} from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import {useEffect} from 'react'
-import {camelCase2SnakeCase} from '../util'
+import { useEffect } from 'react'
+import { camelCase2SnakeCase } from '../util'
 
 const SqlTableName = () => {
     const javaClassName = useRecoilValue(atoms.javaClassName)
@@ -17,7 +17,7 @@ const SqlTableName = () => {
     return (
         <fieldset>
             <legend>SQL Table Name</legend>
-            <code>{sqlTableName}</code>
+            <code>{ sqlTableName }</code>
         </fieldset>
     )
 }

@@ -1,6 +1,6 @@
-import {useRecoilState, useRecoilValue} from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import CopyIcon from '../icons/CopyIcon'
 import SqlIcon from '../icons/SqlIcon'
 
@@ -15,13 +15,13 @@ const SqlTableCode = () => {
         console.log('hasPrimaryKey', hasPrimaryKey)
 
         // sql header
-        const sqlTableHeaderStatement = `CREATE TABLE ${sqlTableName} (\n`
+        const sqlTableHeaderStatement = `CREATE TABLE ${ sqlTableName } (\n`
         console.log('sqlTableHeaderStatement', sqlTableHeaderStatement)
 
         // sql field
         let sqlTableFieldStatement = ''
         sqlFieldList.forEach((sqlField, index) => {
-            sqlTableFieldStatement += `\t${sqlField.name} ${sqlField.type}`
+            sqlTableFieldStatement += `\t${ sqlField.name } ${ sqlField.type }`
             if (hasPrimaryKey || index < sqlFieldList.length - 1) {
                 sqlTableFieldStatement += ',\n'
             }
@@ -33,7 +33,7 @@ const SqlTableCode = () => {
         if (hasPrimaryKey) {
             const primaryKeyFieldList = sqlFieldList.filter((sqlField) => sqlField.primaryKeyFlag)
             const primaryKeyFieldListStr = primaryKeyFieldList.map((sqlField) => sqlField.name).join(', ')
-            sqlTablePrimaryKeyStatement = `\tPRIMARY KEY (${primaryKeyFieldListStr})`
+            sqlTablePrimaryKeyStatement = `\tPRIMARY KEY (${ primaryKeyFieldListStr })`
         }
         console.log('sqlTablePrimaryKeyStatement', sqlTablePrimaryKeyStatement)
 
@@ -42,7 +42,7 @@ const SqlTableCode = () => {
         console.log('sqlTableFooterStatement', sqlTableFooterStatement)
 
         // combination
-        const sqlTableCode = `${sqlTableHeaderStatement}${sqlTableFieldStatement}${sqlTablePrimaryKeyStatement}${sqlTableFooterStatement}`
+        const sqlTableCode = `${ sqlTableHeaderStatement }${ sqlTableFieldStatement }${ sqlTablePrimaryKeyStatement }${ sqlTableFooterStatement }`
         console.log('sqlTableCode', sqlTableCode)
 
         setSqlTableCode(sqlTableCode)
@@ -58,11 +58,11 @@ const SqlTableCode = () => {
         <fieldset>
             <legend><SqlIcon/> SQL Table Code</legend>
             <textarea
-                style={{height: '220px'}}
-                value={sqlTableCode}
-                onChange={e => setSqlTableCode(e.target.value)}
+                style={ { height: '220px' } }
+                value={ sqlTableCode }
+                onChange={ e => setSqlTableCode(e.target.value) }
             />
-            <button onClick={copySqlTableCode2Clipboard}>
+            <button onClick={ copySqlTableCode2Clipboard }>
                 <CopyIcon/> Copy
             </button>
         </fieldset>

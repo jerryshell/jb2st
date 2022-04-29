@@ -1,8 +1,8 @@
-import {useRecoilState, useRecoilValue} from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import SqlField from '../interfaces/SqlField'
-import {camelCase2SnakeCase} from '../util'
+import { camelCase2SnakeCase } from '../util'
 
 const SqlFieldList = () => {
     const javaFieldList = useRecoilValue(atoms.javaFieldList)
@@ -50,27 +50,27 @@ const SqlFieldList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {sqlFieldList.map((sqlField) => {
+                { sqlFieldList.map((sqlField) => {
                     return (
-                        <tr key={sqlField.name}>
+                        <tr key={ sqlField.name }>
                             <td>
-                                <code>{sqlField.type}</code>
+                                <code>{ sqlField.type }</code>
                             </td>
                             <td>
-                                <code>{sqlField.name}</code>
+                                <code>{ sqlField.name }</code>
                             </td>
                             <td>
                                 <input
                                     type="checkbox"
-                                    checked={sqlField.primaryKeyFlag}
-                                    onChange={e => {
+                                    checked={ sqlField.primaryKeyFlag }
+                                    onChange={ e => {
                                         updateSqlFieldPrimaryKeyFlag(sqlField.name, e.target.checked)
-                                    }}
+                                    } }
                                 />
                             </td>
                         </tr>
                     )
-                })}
+                }) }
                 </tbody>
             </table>
         </fieldset>
