@@ -19,7 +19,7 @@ const initJavaType2SqlTypeMap = {
     'Long': 'BIGINT',
     'Boolean': 'TINYINT(1)',
     'Date': 'DATETIME',
-    'Instant': 'TIMESTAMP',
+    'Instant': 'DATETIME',
     'LocalDate': 'DATE',
     'BigDecimal': 'DECIMAL(10,3)',
 } as { [key: string]: string }
