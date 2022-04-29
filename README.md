@@ -1,8 +1,4 @@
-# Java Bean 2 SQL Table
-
-🏗 This project is still in the early stages of development.
-
-⚠️ This project is **NOT** currently applicable to the production environment.
+![jb2st](https://socialify.git.ci/jerryshell/jb2st/image?description=1&font=Raleway&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
 
 ## Link
 
