@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import CopyIcon from '../icons/CopyIcon'
 import SqlIcon from '../icons/SqlIcon'
 
@@ -8,11 +8,17 @@ const SqlTableCode = () => {
     const sqlTableName = useRecoilValue(atoms.sqlTableName)
     const sqlFieldList = useRecoilValue(atoms.sqlFieldList)
 
+    const [dropTableIfExists, setDropTableIfExists] = useState(false)
+
     const [sqlTableCode, setSqlTableCode] = useRecoilState(atoms.sqlTableCode)
 
     useEffect(() => {
         const hasPrimaryKey = sqlFieldList.some(sqlField => sqlField.primaryKeyFlag)
         console.log('hasPrimaryKey', hasPrimaryKey)
+
+        // DROP TABLE IF EXISTS
+        const dropTableIfExistsStatement = dropTableIfExists ? `DROP TABLE IF EXISTS ${sqlTableName};\n\n` : ''
+        console.log('dropTableIfExistsStatement', dropTableIfExistsStatement)
 
         // sql header
         const sqlTableHeaderStatement = `CREATE TABLE ${ sqlTableName } (\n`
@@ -42,11 +48,11 @@ const SqlTableCode = () => {
         console.log('sqlTableFooterStatement', sqlTableFooterStatement)
 
         // combination
-        const sqlTableCode = `${ sqlTableHeaderStatement }${ sqlTableFieldStatement }${ sqlTablePrimaryKeyStatement }${ sqlTableFooterStatement }`
+        const sqlTableCode = `${ dropTableIfExistsStatement }${ sqlTableHeaderStatement }${ sqlTableFieldStatement }${ sqlTablePrimaryKeyStatement }${ sqlTableFooterStatement }`
         console.log('sqlTableCode', sqlTableCode)
 
         setSqlTableCode(sqlTableCode)
-    }, [sqlFieldList])
+    }, [dropTableIfExists, sqlFieldList])
 
     const copySqlTableCode2Clipboard = () => {
         window.navigator.clipboard.writeText(sqlTableCode).then(r => {
@@ -57,6 +63,13 @@ const SqlTableCode = () => {
     return (
         <fieldset>
             <legend><SqlIcon/> SQL Table Code</legend>
+            <label>
+                <span>DROP TABLE IF EXISTS</span>
+                <input
+                    type="checkbox"
+                    onChange={ (e) => setDropTableIfExists(e.target.checked) }
+                />
+            </label>
             <textarea
                 style={ { height: '220px' } }
                 value={ sqlTableCode }
