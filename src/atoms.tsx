@@ -54,4 +54,8 @@ export default {
         key: 'sqlTableCode',
         default: '',
     }),
+    dropTableIfExists: atom({
+        key: 'dropTableIfExists',
+        default: false,
+    })
 }

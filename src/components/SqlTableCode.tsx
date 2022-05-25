@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import CopyIcon from '../icons/CopyIcon'
 import SqlIcon from '../icons/SqlIcon'
 
@@ -8,8 +8,7 @@ const SqlTableCode = () => {
     const sqlTableName = useRecoilValue(atoms.sqlTableName)
     const sqlFieldList = useRecoilValue(atoms.sqlFieldList)
 
-    const [dropTableIfExists, setDropTableIfExists] = useState(false)
-
+    const [dropTableIfExists, setDropTableIfExists] = useRecoilState(atoms.dropTableIfExists)
     const [sqlTableCode, setSqlTableCode] = useRecoilState(atoms.sqlTableCode)
 
     useEffect(() => {
@@ -67,6 +66,7 @@ const SqlTableCode = () => {
                 <span>DROP TABLE IF EXISTS</span>
                 <input
                     type="checkbox"
+                    checked={ dropTableIfExists }
                     onChange={ (e) => setDropTableIfExists(e.target.checked) }
                 />
             </label>
