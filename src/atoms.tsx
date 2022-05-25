@@ -38,6 +38,10 @@ export default {
         key: 'javaClassName',
         default: '',
     }),
+    sqlTableNamePrefix: atom({
+        key: 'sqlTableNamePrefix',
+        default: '',
+    }),
     sqlTableName: atom({
         key: 'sqlTableName',
         default: '',
@@ -57,5 +61,5 @@ export default {
     dropTableIfExists: atom({
         key: 'dropTableIfExists',
         default: false,
-    })
+    }),
 }
