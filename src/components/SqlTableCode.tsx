@@ -51,7 +51,7 @@ const SqlTableCode = () => {
         console.log('sqlTableCode', sqlTableCode)
 
         setSqlTableCode(sqlTableCode)
-    }, [dropTableIfExists, sqlFieldList])
+    }, [dropTableIfExists, sqlFieldList, sqlTableName])
 
     const copySqlTableCode2Clipboard = () => {
         window.navigator.clipboard.writeText(sqlTableCode).then(r => {
