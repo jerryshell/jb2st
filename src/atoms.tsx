@@ -14,52 +14,52 @@ public class JavaBean {
 }`
 
 const initJavaType2SqlTypeMap = {
-    'String': 'VARCHAR(255)',
-    'Integer': 'INT(11)',
-    'Long': 'BIGINT',
-    'Boolean': 'TINYINT(1)',
-    'Date': 'DATETIME',
-    'Instant': 'DATETIME',
-    'LocalDate': 'DATE',
-    'LocalDateTime': 'DATETIME',
-    'BigDecimal': 'DECIMAL(10,3)',
+  'String': 'VARCHAR(255)',
+  'Integer': 'INT(11)',
+  'Long': 'BIGINT',
+  'Boolean': 'TINYINT(1)',
+  'Date': 'DATETIME',
+  'Instant': 'DATETIME',
+  'LocalDate': 'DATE',
+  'LocalDateTime': 'DATETIME',
+  'BigDecimal': 'DECIMAL(10,3)',
 } as { [key: string]: string }
 
 export default {
-    javaType2SqlTypeMap: atom({
-        key: 'javaType2SqlTypeMap',
-        default: initJavaType2SqlTypeMap,
-    }),
-    javaBeanCode: atom({
-        key: 'javaBeanCode',
-        default: initJavaBeanCode,
-    }),
-    javaClassName: atom({
-        key: 'javaClassName',
-        default: '',
-    }),
-    sqlTableNamePrefix: atom({
-        key: 'sqlTableNamePrefix',
-        default: '',
-    }),
-    sqlTableName: atom({
-        key: 'sqlTableName',
-        default: '',
-    }),
-    javaFieldList: atom({
-        key: 'javaFieldList',
-        default: [] as JavaField[],
-    }),
-    sqlFieldList: atom({
-        key: 'sqlFieldList',
-        default: [] as SqlField[],
-    }),
-    sqlTableCode: atom({
-        key: 'sqlTableCode',
-        default: '',
-    }),
-    dropTableIfExists: atom({
-        key: 'dropTableIfExists',
-        default: false,
-    }),
+  javaType2SqlTypeMap: atom({
+    key: 'javaType2SqlTypeMap',
+    default: initJavaType2SqlTypeMap,
+  }),
+  javaBeanCode: atom({
+    key: 'javaBeanCode',
+    default: initJavaBeanCode,
+  }),
+  javaClassName: atom({
+    key: 'javaClassName',
+    default: '',
+  }),
+  sqlTableNamePrefix: atom({
+    key: 'sqlTableNamePrefix',
+    default: '',
+  }),
+  sqlTableName: atom({
+    key: 'sqlTableName',
+    default: '',
+  }),
+  javaFieldList: atom({
+    key: 'javaFieldList',
+    default: [] as JavaField[],
+  }),
+  sqlFieldList: atom({
+    key: 'sqlFieldList',
+    default: [] as SqlField[],
+  }),
+  sqlTableCode: atom({
+    key: 'sqlTableCode',
+    default: '',
+  }),
+  dropTableIfExists: atom({
+    key: 'dropTableIfExists',
+    default: false,
+  }),
 }

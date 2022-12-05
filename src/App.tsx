@@ -9,19 +9,19 @@ import JavaType2SqlTypeMapConfig from './components/JavaType2SqlTypeMapConfig'
 import SqlTableCode from './components/SqlTableCode'
 
 const App = () => {
-    return (
-        <>
-            <h1>Java Bean 2 SQL Table</h1>
-            <ProjectInfo/>
-            <JavaBeanCode/>
-            <JavaClassName/>
-            <JavaFieldList/>
-            <SqlTableName/>
-            <SqlFieldList/>
-            <JavaType2SqlTypeMapConfig/>
-            <SqlTableCode/>
-        </>
-    )
+  return (
+    <>
+      <h1>Java Bean 2 SQL Table</h1>
+      <ProjectInfo/>
+      <JavaBeanCode/>
+      <JavaClassName/>
+      <JavaFieldList/>
+      <SqlTableName/>
+      <SqlFieldList/>
+      <JavaType2SqlTypeMapConfig/>
+      <SqlTableCode/>
+    </>
+  )
 }
 
 export default App

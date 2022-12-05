@@ -1,5 +1,5 @@
 export default interface SqlField {
-    type: string
-    name: string
-    primaryKeyFlag: boolean
+  type: string
+  name: string
+  primaryKeyFlag: boolean
 }

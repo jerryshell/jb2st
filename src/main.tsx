@@ -7,9 +7,9 @@ import { RecoilRoot } from 'recoil'
 const root = ReactDOMClient.createRoot(document.getElementById('root')!)
 
 root.render(
-    <RecoilRoot>
-        <React.StrictMode>
-            <App/>
-        </React.StrictMode>
-    </RecoilRoot>,
+  <RecoilRoot>
+    <React.StrictMode>
+      <App/>
+    </React.StrictMode>
+  </RecoilRoot>,
 )
