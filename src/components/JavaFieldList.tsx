@@ -1,8 +1,8 @@
 import { useRecoilValue } from 'recoil'
-import selectors from '../selectors'
+import javaFieldListSelector from '../selectors/javaFieldListSelector';
 
 const JavaFieldList = () => {
-  const javaFieldList = useRecoilValue(selectors.javaFieldList)
+  const javaFieldList = useRecoilValue(javaFieldListSelector)
 
   return (
     <fieldset>

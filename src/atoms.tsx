@@ -37,10 +37,6 @@ export default {
     key: 'sqlTableNamePrefix',
     default: '',
   }),
-  sqlTableName: atom({
-    key: 'sqlTableName',
-    default: '',
-  }),
   sqlFieldList: atom({
     key: 'sqlFieldList',
     default: [] as SqlField[],

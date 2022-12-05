@@ -3,9 +3,10 @@ import atoms from '../atoms'
 import { useEffect } from 'react'
 import CopyIcon from '../icons/CopyIcon'
 import SqlIcon from '../icons/SqlIcon'
+import sqlTableNameSelector from '../selectors/sqlTableNameSelector';
 
 const SqlTableCode = () => {
-  const sqlTableName = useRecoilValue(atoms.sqlTableName)
+  const sqlTableName = useRecoilValue(sqlTableNameSelector)
   const sqlFieldList = useRecoilValue(atoms.sqlFieldList)
 
   const [dropTableIfExists, setDropTableIfExists] = useRecoilState(atoms.dropTableIfExists)

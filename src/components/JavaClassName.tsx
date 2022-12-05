@@ -1,8 +1,9 @@
 import { useRecoilValue } from 'recoil'
-import selectors from '../selectors'
+import javaClassNameSelector from '../selectors/javaClassNameSelector';
 
 const JavaClassName = () => {
-  const javaClassName = useRecoilValue(selectors.javaClassName)
+  const javaClassName = useRecoilValue(javaClassNameSelector)
+
   return (
     <fieldset>
       <legend>Java Class Name</legend>
