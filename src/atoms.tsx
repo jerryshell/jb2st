@@ -34,10 +34,6 @@ export default {
     key: 'javaBeanCode',
     default: initJavaBeanCode,
   }),
-  javaClassName: atom({
-    key: 'javaClassName',
-    default: '',
-  }),
   sqlTableNamePrefix: atom({
     key: 'sqlTableNamePrefix',
     default: '',
