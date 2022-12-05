@@ -1,15 +1,16 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
-import atoms from '../atoms'
 import { useEffect } from 'react'
 import SqlField from '../interfaces/SqlField'
 import { camelCase2SnakeCase } from '../util'
 import javaFieldListSelector from '../selectors/javaFieldListSelector';
+import javaType2SqlTypeMapAtom from '../atoms/javaType2SqlTypeMapAtom';
+import sqlFieldListAtom from '../atoms/sqlFieldListAtom';
 
 const SqlFieldList = () => {
   const javaFieldList = useRecoilValue(javaFieldListSelector)
-  const javaType2SqlTypeMap = useRecoilValue(atoms.javaType2SqlTypeMap)
+  const javaType2SqlTypeMap = useRecoilValue(javaType2SqlTypeMapAtom)
 
-  const [sqlFieldList, setSqlFieldList] = useRecoilState(atoms.sqlFieldList)
+  const [sqlFieldList, setSqlFieldList] = useRecoilState(sqlFieldListAtom)
 
   useEffect(() => {
     const sqlFieldList = javaFieldList.map((javaField) => {

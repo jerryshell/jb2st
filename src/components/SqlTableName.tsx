@@ -1,11 +1,11 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
-import atoms from '../atoms'
 import sqlTableNameSelector from '../selectors/sqlTableNameSelector';
+import sqlTableNamePrefixAtom from '../atoms/sqlTableNamePrefixAtom';
 
 const SqlTableName = () => {
   const sqlTableName = useRecoilValue(sqlTableNameSelector)
 
-  const [sqlTableNamePrefix, setSqlTableNamePrefix] = useRecoilState(atoms.sqlTableNamePrefix)
+  const [sqlTableNamePrefix, setSqlTableNamePrefix] = useRecoilState(sqlTableNamePrefixAtom)
 
   return (
     <>

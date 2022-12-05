@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil'
-import atoms from '../atoms'
 import JavaIcon from '../icons/JavaIcon'
+import javaBeanCodeAtom from '../atoms/javaBeanCodeAtom';
 
 const JavaBeanCode = () => {
-  const [javaBeanCode, setJavaBeanStr] = useRecoilState(atoms.javaBeanCode)
+  const [javaBeanCode, setJavaBeanStr] = useRecoilState(javaBeanCodeAtom)
 
   return (
     <fieldset>

@@ -1,11 +1,11 @@
 import { useRecoilState } from 'recoil'
-import atoms from '../atoms'
 import { useState } from 'react'
 import AddIcon from '../icons/AddIcon'
 import RemoveIcon from '../icons/RemoveIcon'
+import javaType2SqlTypeMapAtom from '../atoms/javaType2SqlTypeMapAtom';
 
 const JavaType2SqlTypeMapConfig = () => {
-  const [javaType2SqlTypeMap, setJavaType2SqlTypeMap] = useRecoilState(atoms.javaType2SqlTypeMap)
+  const [javaType2SqlTypeMap, setJavaType2SqlTypeMap] = useRecoilState(javaType2SqlTypeMapAtom)
   const [newJavaType, setNewJavaType] = useState('')
   const [newSqlType, setNewSqlType] = useState('')
 

@@ -1,11 +1,11 @@
 import { selector } from 'recoil';
-import atoms from '../atoms';
 import JavaField from '../interfaces/JavaField';
+import javaBeanCodeAtom from '../atoms/javaBeanCodeAtom';
 
 const javaFieldListSelector = selector({
   key: 'javaFieldList',
   get: ({ get }) => {
-    const javaFieldLineListMatchResult = get(atoms.javaBeanCode).match(/private (.*);/g)
+    const javaFieldLineListMatchResult = get(javaBeanCodeAtom).match(/private (.*);/g)
     if (!javaFieldLineListMatchResult) {
       return [] as JavaField[]
     }

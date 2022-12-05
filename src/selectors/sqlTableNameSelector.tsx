@@ -1,12 +1,12 @@
 import { selector } from 'recoil';
-import atoms from '../atoms';
 import { camelCase2SnakeCase } from '../util';
 import javaClassNameSelector from './javaClassNameSelector';
+import sqlTableNamePrefixAtom from '../atoms/sqlTableNamePrefixAtom';
 
 const sqlTableNameSelector = selector({
   key: 'sqlTableName',
   get: ({ get }) => {
-    return get(atoms.sqlTableNamePrefix) + camelCase2SnakeCase(get(javaClassNameSelector))
+    return get(sqlTableNamePrefixAtom) + camelCase2SnakeCase(get(javaClassNameSelector))
   },
 })
 

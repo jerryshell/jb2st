@@ -1,16 +1,18 @@
 import { useRecoilState, useRecoilValue } from 'recoil'
-import atoms from '../atoms'
 import { useEffect } from 'react'
 import CopyIcon from '../icons/CopyIcon'
 import SqlIcon from '../icons/SqlIcon'
 import sqlTableNameSelector from '../selectors/sqlTableNameSelector';
+import sqlFieldListAtom from '../atoms/sqlFieldListAtom';
+import dropTableIfExistsAtom from '../atoms/dropTableIfExistsAtom';
+import sqlTableCodeAtom from '../atoms/sqlTableCodeAtom';
 
 const SqlTableCode = () => {
   const sqlTableName = useRecoilValue(sqlTableNameSelector)
-  const sqlFieldList = useRecoilValue(atoms.sqlFieldList)
+  const sqlFieldList = useRecoilValue(sqlFieldListAtom)
 
-  const [dropTableIfExists, setDropTableIfExists] = useRecoilState(atoms.dropTableIfExists)
-  const [sqlTableCode, setSqlTableCode] = useRecoilState(atoms.sqlTableCode)
+  const [dropTableIfExists, setDropTableIfExists] = useRecoilState(dropTableIfExistsAtom)
+  const [sqlTableCode, setSqlTableCode] = useRecoilState(sqlTableCodeAtom)
 
   useEffect(() => {
     const hasPrimaryKey = sqlFieldList.some(sqlField => sqlField.primaryKeyFlag)

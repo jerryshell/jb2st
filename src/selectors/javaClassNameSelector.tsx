@@ -1,10 +1,10 @@
 import { selector } from 'recoil';
-import atoms from '../atoms';
+import javaBeanCodeAtom from '../atoms/javaBeanCodeAtom';
 
 const javaClassNameSelector = selector({
   key: 'javaClassName',
   get: ({ get }) => {
-    const javaClassNameMatchResult = get(atoms.javaBeanCode).match(/public class (\w+)/)
+    const javaClassNameMatchResult = get(javaBeanCodeAtom).match(/public class (\w+)/)
     if (!javaClassNameMatchResult) {
       return ''
     }
