@@ -1,5 +1,4 @@
 import { atom } from 'recoil'
-import JavaField from './interfaces/JavaField'
 import SqlField from './interfaces/SqlField'
 
 const initJavaBeanCode = `@Data
@@ -41,10 +40,6 @@ export default {
   sqlTableName: atom({
     key: 'sqlTableName',
     default: '',
-  }),
-  javaFieldList: atom({
-    key: 'javaFieldList',
-    default: [] as JavaField[],
   }),
   sqlFieldList: atom({
     key: 'sqlFieldList',

@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import atoms from '../atoms'
 import { useEffect } from 'react'
 import { camelCase2SnakeCase } from '../util'
-import selectors from '../selectors';
+import selectors from '../selectors'
 
 const SqlTableName = () => {
   const javaClassName = useRecoilValue(selectors.javaClassName)

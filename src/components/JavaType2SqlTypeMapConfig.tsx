@@ -33,7 +33,7 @@ const JavaType2SqlTypeMapConfig = () => {
           <th>Action</th>
         </tr>
         </thead>
-
+        <tbody>
         <tr>
           <td>
             <input
@@ -63,7 +63,6 @@ const JavaType2SqlTypeMapConfig = () => {
             </button>
           </td>
         </tr>
-
         {Object.keys(javaType2SqlTypeMap).map((javaType) => {
           return (
             <tr key={javaType}>
@@ -87,7 +86,7 @@ const JavaType2SqlTypeMapConfig = () => {
             </tr>
           )
         })}
-
+        </tbody>
       </table>
     </fieldset>
   )

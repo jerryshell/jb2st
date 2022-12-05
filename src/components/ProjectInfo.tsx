@@ -3,19 +3,9 @@ const ProjectInfo = () => {
     <fieldset>
       <legend>Project Info</legend>
       <table>
+        <tbody>
         <tr>
-          <td>Author</td>
-          <td>
-            <a
-              href="https://github.com/jerryshell"
-              target="_blank"
-            >
-              github.com/jerryshell
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>GitHub</td>
+          <td>Source code</td>
           <td>
             <a
               href="https://github.com/jerryshell/jb2st"
@@ -36,6 +26,7 @@ const ProjectInfo = () => {
             </a>
           </td>
         </tr>
+        </tbody>
       </table>
     </fieldset>
   )

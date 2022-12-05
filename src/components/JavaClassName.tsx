@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil'
-import selectors from '../selectors';
+import selectors from '../selectors'
 
 const JavaClassName = () => {
   const javaClassName = useRecoilValue(selectors.javaClassName)
