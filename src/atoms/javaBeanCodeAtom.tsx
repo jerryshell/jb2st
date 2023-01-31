@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil'
 
 const initJavaBeanCode = `@Data
 public class JavaBean {
@@ -12,8 +12,8 @@ public class JavaBean {
 }`
 
 const javaBeanCodeAtom = atom({
-  key: 'javaBeanCode',
-  default: initJavaBeanCode,
+    key: 'javaBeanCode',
+    default: initJavaBeanCode,
 })
 
 export default javaBeanCodeAtom

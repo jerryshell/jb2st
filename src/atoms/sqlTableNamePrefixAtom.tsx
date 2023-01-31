@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil'
 
 const sqlTableNamePrefixAtom = atom({
-  key: 'sqlTableNamePrefix',
-  default: '',
+    key: 'sqlTableNamePrefix',
+    default: '',
 })
 
 export default sqlTableNamePrefixAtom

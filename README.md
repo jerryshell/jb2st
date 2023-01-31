@@ -4,7 +4,7 @@
 
 [https://jb2st.pages.dev](https://jb2st.pages.dev)
 
-Failover link for CLAN: [https://jb2st.jerryshell.cn](https://jb2st.jerryshell.cn)
+OR: [https://jb2st.jerryshell.eu.org](https://jb2st.jerryshell.eu.org)
 
 ## License
 

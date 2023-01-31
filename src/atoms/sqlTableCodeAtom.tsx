@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil'
 
 const sqlTableCodeAtom = atom({
-  key: 'sqlTableCode',
-  default: '',
+    key: 'sqlTableCode',
+    default: '',
 })
 
 export default sqlTableCodeAtom
